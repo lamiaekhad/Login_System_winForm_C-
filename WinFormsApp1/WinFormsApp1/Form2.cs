@@ -50,6 +50,10 @@ namespace WinFormsApp1
             {
                 MessageBox.Show("Le mot de passe ne correspond pas");
             }
+            else if (valide.validationString(user.Nom) && valide.validationString(user.Prenom))
+            {
+                MessageBox.Show("Champ reserver pour les lettres");
+            }
             else
             {
                 sqlconnect Tosql = new sqlconnect();
@@ -61,7 +65,7 @@ namespace WinFormsApp1
                                  "VALUES (@nom, @prenom, @nomutilisatreur, @courriel, @motdepasse, @confirmation, @statut)";
 
                     MySqlCommand command = new MySqlCommand(sql, conn);
-                    command.Parameters.AddWithValue("@nom",valide.validationString(user.Nom));
+                    command.Parameters.AddWithValue("@nom",user.Nom);
                     command.Parameters.AddWithValue("@prenom", user.Prenom);
                     command.Parameters.AddWithValue("@nomutilisatreur", user.NomUtilisateur);
                     command.Parameters.AddWithValue("@courriel", user.Courriel);
