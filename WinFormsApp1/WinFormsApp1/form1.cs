@@ -39,7 +39,7 @@ namespace WinFormsApp1
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void label3_Click_1(object sender, EventArgs e)
@@ -62,18 +62,19 @@ namespace WinFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
+
             sqlconnect sql = new sqlconnect();
             
             int login = 0;
             bool valide = false;
-
+            int count = 0;
             MySqlConnection conn1 = sql.connectTobase();
             try
             {
-                MySqlCommand command2 = new MySqlCommand("select count(*) login from user where nomutilisateur=@nomutilisateur and motdepasse=@motdepasse", conn1);
+                MySqlCommand command2 = new MySqlCommand("select count(*) login from user where nomutilisateur=@nomutilisateur and confirmation=@confirmation", conn1);
                 command2.Parameters.AddWithValue("login", login);
                 command2.Parameters.AddWithValue("nomutilisateur",nomutilisateur1.Text);
-                command2.Parameters.AddWithValue("motdepasse", security.Hash(motdepasse1.Text));
+                command2.Parameters.AddWithValue("confirmation", security.Hash(motdepasse1.Text));
                 using (MySqlDataReader reader = command2.ExecuteReader())
                 {
                     if (reader.HasRows)
@@ -84,11 +85,24 @@ namespace WinFormsApp1
                         }
                     }
                 }
-                if (login.Equals(0))
+                if (login.Equals(0) || count == 1)
                 {
                     valide = true;
-                    MessageBox.Show("Nom d'utilisateur ou mot de passe incorect ", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Mot de passe non valide. essai encore");
+                    count = count + 1;
                 }
+                //if (login.Equals(0) || count ==2)
+                //{
+                //    valide = true;
+                //    MessageBox.Show("Mot de passe non valide. essai encore");
+                //    count = count + 1;
+                //}
+                //if (login.Equals(0) || count ==3)
+                //{
+                //    valide = true;
+                //    MessageBox.Show("Mot de passe non valide. dernier essai");
+                //    count = count + 1;
+                //}
                 else
                 {
                     Main main = new Main();

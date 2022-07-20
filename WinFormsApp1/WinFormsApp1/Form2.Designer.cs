@@ -113,6 +113,7 @@
             // prenom
             // 
             this.prenom.Location = new System.Drawing.Point(294, 97);
+            this.prenom.MaxLength = 25;
             this.prenom.Name = "prenom";
             this.prenom.Size = new System.Drawing.Size(379, 27);
             this.prenom.TabIndex = 7;
@@ -121,13 +122,16 @@
             // nomutilisateur
             // 
             this.nomutilisateur.Location = new System.Drawing.Point(294, 148);
+            this.nomutilisateur.MaxLength = 25;
             this.nomutilisateur.Name = "nomutilisateur";
             this.nomutilisateur.Size = new System.Drawing.Size(379, 27);
             this.nomutilisateur.TabIndex = 8;
+            this.nomutilisateur.TextChanged += new System.EventHandler(this.nomutilisateur_TextChanged);
             // 
             // courriel
             // 
             this.courriel.Location = new System.Drawing.Point(294, 202);
+            this.courriel.MaxLength = 30;
             this.courriel.Name = "courriel";
             this.courriel.Size = new System.Drawing.Size(379, 27);
             this.courriel.TabIndex = 9;
@@ -136,6 +140,7 @@
             // motdepasse
             // 
             this.motdepasse.Location = new System.Drawing.Point(294, 252);
+            this.motdepasse.MaxLength = 30;
             this.motdepasse.Name = "motdepasse";
             this.motdepasse.Size = new System.Drawing.Size(379, 27);
             this.motdepasse.TabIndex = 10;
@@ -143,6 +148,7 @@
             // confirmation
             // 
             this.confirmation.Location = new System.Drawing.Point(294, 303);
+            this.confirmation.MaxLength = 30;
             this.confirmation.Name = "confirmation";
             this.confirmation.Size = new System.Drawing.Size(379, 27);
             this.confirmation.TabIndex = 11;

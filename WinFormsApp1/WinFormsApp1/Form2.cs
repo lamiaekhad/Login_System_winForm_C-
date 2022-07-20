@@ -46,14 +46,14 @@ namespace WinFormsApp1
             {
                 MessageBox.Show("Merci de remplir les champs obligatoires");
             }
-            else if (motdepasse.Text != confirmation.Text)
+             else if (motdepasse.Text != confirmation.Text)
             {
                 MessageBox.Show("Le mot de passe ne correspond pas");
             }
-            else if (valide.validationString(user.Nom) && valide.validationString(user.Prenom))
-            {
-                MessageBox.Show("Champ reserver pour les lettres");
-            }
+            //if (!valide.validationString(user.Nom) && !valide.validationString(user.Prenom) && !valide.validationStringUtilisateur(user.NomUtilisateur))
+            //{
+            //    MessageBox.Show("Caractere non reconue");
+            //}
             else
             {
                 sqlconnect Tosql = new sqlconnect();
@@ -65,16 +65,20 @@ namespace WinFormsApp1
                                  "VALUES (@nom, @prenom, @nomutilisatreur, @courriel, @motdepasse, @confirmation, @statut)";
 
                     MySqlCommand command = new MySqlCommand(sql, conn);
-                    command.Parameters.AddWithValue("@nom",user.Nom);
+                    command.Parameters.AddWithValue("@nom", user.Nom);
                     command.Parameters.AddWithValue("@prenom", user.Prenom);
                     command.Parameters.AddWithValue("@nomutilisatreur", user.NomUtilisateur);
                     command.Parameters.AddWithValue("@courriel", user.Courriel);
-                    command.Parameters.AddWithValue("@motdepasse", security.Hash(user.MotDePasse));
+                    command.Parameters.AddWithValue("@motdepasse", security.HashSalt(user.MotDePasse));
                     command.Parameters.AddWithValue("@confirmation", security.Hash(user.Confirmation));
                     command.Parameters.AddWithValue("@statut", "non");
                     command.ExecuteReader();
-                    
+
                     MessageBox.Show("Vous avez creer un nouveau compte");
+                    Form1 newform = new Form1();
+                    this.Hide();
+                    newform.ShowDialog();
+                    this.Show();
                 }
                 catch (Exception ex)
                 {
@@ -83,18 +87,19 @@ namespace WinFormsApp1
                 finally
                 {
                     conn.Close();
+                   
                 }
             }
-            Form1 newform = new Form1();
-            this.Hide();
-            newform.ShowDialog();
-            this.Show();
+          
 
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            
+            if (valide.validationString(nom.Text))
+            {
+                nom.Text = "";
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -104,12 +109,15 @@ namespace WinFormsApp1
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-
+            if (valide.validationString(prenom.Text))
+            {
+                prenom.Text = "";
+            }
         }
 
         private void courriel_TextChanged(object sender, EventArgs e)
         {
-
+           
         }
 
         private void confirmation_TextChanged(object sender, EventArgs e)
@@ -121,6 +129,13 @@ namespace WinFormsApp1
         {
 
         }
-       
+
+        private void nomutilisateur_TextChanged(object sender, EventArgs e)
+        {
+           if(valide.validationStringUtilisateur(nomutilisateur.Text))
+            {
+                nomutilisateur.Text = "";
+            }
+        }
     }
 }
