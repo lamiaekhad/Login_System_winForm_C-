@@ -1,14 +1,11 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Security.Cryptography;
-using System.Configuration;
 
 namespace WinFormsApp1
 {
@@ -60,19 +57,55 @@ namespace WinFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Environment.Exit(0);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-           
-            //else
-            //{
-            //    Main main = new Main();
-            //    this.Hide();
-            //    main.ShowDialog();
-            //    this.Show();
-            //}
+            sqlconnect sql = new sqlconnect();
+            
+            int login = 0;
+            bool valide = false;
+
+            MySqlConnection conn1 = sql.connectTobase();
+            try
+            {
+                MySqlCommand command2 = new MySqlCommand("select count(*) login from user where nomutilisateur=@nomutilisateur and motdepasse=@motdepasse", conn1);
+                command2.Parameters.AddWithValue("login", login);
+                command2.Parameters.AddWithValue("nomutilisateur",nomutilisateur1.Text);
+                command2.Parameters.AddWithValue("motdepasse", security.Hash(motdepasse1.Text));
+                using (MySqlDataReader reader = command2.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            login = reader.GetInt32("login");
+                        }
+                    }
+                }
+                if (login.Equals(0))
+                {
+                    valide = true;
+                    MessageBox.Show("Nom d'utilisateur ou mot de passe incorect ", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    Main main = new Main();
+                    this.Hide();
+                    main.ShowDialog();
+                    this.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                conn1.Close();
+            }
+        
         }
     }
 }

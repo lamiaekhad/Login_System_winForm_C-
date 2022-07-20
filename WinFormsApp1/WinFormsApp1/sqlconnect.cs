@@ -4,6 +4,7 @@ using System.Text;
 using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WinFormsApp1
 {
@@ -12,7 +13,7 @@ namespace WinFormsApp1
         public MySqlConnection connectTobase()
         {
             MySqlConnection cnn;
-            string connectionString = "server=localhost;database=security_project;uid=root;pwd=;";
+            string connectionString = "server=localhost;database=data_login;uid=root;pwd=;";
             cnn = new MySqlConnection(connectionString);
 
             try
@@ -21,7 +22,8 @@ namespace WinFormsApp1
             }
             catch (Exception ex)
             {
-                
+
+                MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             return cnn;
         }

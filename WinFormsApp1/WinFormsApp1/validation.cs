@@ -15,7 +15,7 @@ namespace WinFormsApp1
             if (!Regex.Match(nom, "^[a-zA-Z]*$").Success)
             {
                 valide = true;
-                MessageBox.Show("Choix non valide ");
+                MessageBox.Show("Erreur");
             }
             return valide;
         }
