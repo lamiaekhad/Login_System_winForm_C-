@@ -22,15 +22,9 @@ namespace WinFormsApp1
             confirmation.PasswordChar = '*';
         }
 
-        private void Form2_Load(object sender, EventArgs e)
-        {
+       
 
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
+       
         public bool ifUserNameExist()
         {
             int exist = 0;
@@ -61,7 +55,7 @@ namespace WinFormsApp1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("coco", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             finally
             {
@@ -80,11 +74,11 @@ namespace WinFormsApp1
             user.MotDePasse = motdepasse.Text;
             user.Confirmation = confirmation.Text;
 
-            if (nomutilisateur.Text == "" || motdepasse.Text == "")
+            if (user.NomUtilisateur == "" || user.MotDePasse == "" || user.Nom == "" || user.Prenom == "" || user.Courriel == "" || user.Confirmation == "")
             {
                 MessageBox.Show("Merci de remplir les champs obligatoires");
             }
-             else if (motdepasse.Text != confirmation.Text)
+            else if (motdepasse.Text != confirmation.Text)
             {
                 MessageBox.Show("Le mot de passe ne correspond pas");
             }
@@ -123,7 +117,7 @@ namespace WinFormsApp1
                }
                catch (Exception ex)
                {
-                   MessageBox.Show("pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                   MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                }
                finally
                {
@@ -132,8 +126,6 @@ namespace WinFormsApp1
                }
                 
             }
-          
-
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -178,6 +170,11 @@ namespace WinFormsApp1
             {
                 nomutilisateur.Text = "";
             }
+        }
+
+        private void motdepasse_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

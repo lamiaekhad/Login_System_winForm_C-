@@ -73,6 +73,7 @@
             this.motdepasse1.Name = "motdepasse1";
             this.motdepasse1.Size = new System.Drawing.Size(348, 27);
             this.motdepasse1.TabIndex = 4;
+            this.motdepasse1.TextChanged += new System.EventHandler(this.motdepasse1_TextChanged);
             // 
             // button1
             // 

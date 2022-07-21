@@ -63,21 +63,21 @@ namespace WinFormsApp1
         int count = 0;
         private void button2_Click(object sender, EventArgs e)
         {
-            sqlconnect sql = new sqlconnect();
             int login = 0;
-            bool valide = false;
-
-
+            sqlconnect sql = new sqlconnect();
             MySqlConnection conn1 = sql.connectTobase();
+
+            user.NomUtilisateur = nomutilisateur1.Text;
+            user.MotDePasse = motdepasse1.Text;
+
             try
             {
                 string statut2 = GetStatut(nomutilisateur1.Text);
-
-                string statut = "non";
-                MySqlCommand command2 = new MySqlCommand("select count(*) login from user where nomutilisateur=@nomutilisateur and confirmation=@confirmation and statut=@statut", conn1);
+                string statut= "non";
+                MySqlCommand command2 = new MySqlCommand("select count(*) login from user where nomutilisateur=@nomutilisateur and motdepasse=@motdepasse and statut=@statut", conn1);
                 command2.Parameters.AddWithValue("login", login);
-                command2.Parameters.AddWithValue("nomutilisateur", nomutilisateur1.Text);
-                command2.Parameters.AddWithValue("confirmation", security.Hash(motdepasse1.Text));
+                command2.Parameters.AddWithValue("nomutilisateur", user.NomUtilisateur);
+                command2.Parameters.AddWithValue("motdepasse", security.Hash(user.MotDePasse + security.Selage()));
                 command2.Parameters.AddWithValue("statut",statut);
 
                 using (MySqlDataReader reader = command2.ExecuteReader())
@@ -90,22 +90,25 @@ namespace WinFormsApp1
                         }
                     }
                 }
+               
                 if (!login.Equals(0))
                 {
                     Main main = new Main();
                     this.Hide();
                     main.ShowDialog();
                     this.Show();
+                    ClearBoxText();
+                    nomutilisateur1.Focus();
                 }
                 else if (statut2=="oui")
                 {
-                    MessageBox.Show("Le compte est verrouille. cantactez l'administrateur!", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Le compte est verrouille. Contactez l'administrateur!", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ClearBoxText();
                 }
                 else if (count < 3 && statut=="non")
                 {
-                     MessageBox.Show("Mot de passe non valide. essai encore", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                     nomutilisateur1.Text = "";
-                     motdepasse1.Text = "";
+                     MessageBox.Show("Le mot de passe est incorrect. essayez à nouveau", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                     ClearBoxText();
                      count = count + 1;
                 
                 }
@@ -116,15 +119,19 @@ namespace WinFormsApp1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Pas de connexion a la base de donnees", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             finally
             {
                 conn1.Close();
             }
-            
         }
 
+        public void ClearBoxText()
+        {
+            nomutilisateur1.Text = "";
+            motdepasse1.Text = "";
+        }
         public void Updatestatut(string nomutilisateur)
         {
             sqlconnect sql = new sqlconnect();
@@ -138,17 +145,15 @@ namespace WinFormsApp1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             finally
             {
                 conn1.Close();
             }
-
         }
         public string GetStatut(string nomutilisateur)
         {
-
             sqlconnect sql = new sqlconnect();
             MySqlConnection conn1 = sql.connectTobase();
             try
@@ -170,14 +175,18 @@ namespace WinFormsApp1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             finally
             {
                 conn1.Close();
-            }
 
+            }
             return user.Statut;
+        }
+
+        private void motdepasse1_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }
