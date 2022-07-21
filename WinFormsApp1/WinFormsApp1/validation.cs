@@ -15,12 +15,9 @@ namespace WinFormsApp1
             {
                 valide = true;
                 MessageBox.Show("La donnée n’est pas dans le bon format");
-
             }
-           
             return valide;
         }
-
         public bool validationStringUtilisateur(string nomutilisateur)
         {
             string message = string.Empty;
@@ -29,10 +26,8 @@ namespace WinFormsApp1
             {
                 valide = true;
                 MessageBox.Show("La donnée n’est pas dans le bon format");
-                
             }
             return valide;
         }
-
     }
 }

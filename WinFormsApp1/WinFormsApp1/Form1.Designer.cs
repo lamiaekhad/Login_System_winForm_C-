@@ -46,7 +46,7 @@
             this.label1.Size = new System.Drawing.Size(98, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Mot de passe";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+           
             // 
             // label2
             // 
@@ -56,7 +56,7 @@
             this.label2.Size = new System.Drawing.Size(123, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "Nom d\'utilisateur";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+           
             // 
             // nomutilisateur1
             // 
@@ -65,7 +65,7 @@
             this.nomutilisateur1.Name = "nomutilisateur1";
             this.nomutilisateur1.Size = new System.Drawing.Size(348, 27);
             this.nomutilisateur1.TabIndex = 3;
-            this.nomutilisateur1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+         
             // 
             // motdepasse1
             // 
@@ -73,7 +73,7 @@
             this.motdepasse1.Name = "motdepasse1";
             this.motdepasse1.Size = new System.Drawing.Size(348, 27);
             this.motdepasse1.TabIndex = 4;
-            this.motdepasse1.TextChanged += new System.EventHandler(this.motdepasse1_TextChanged);
+           
             // 
             // button1
             // 
@@ -117,7 +117,7 @@
             this.label3.Size = new System.Drawing.Size(408, 45);
             this.label3.TabIndex = 8;
             this.label3.Text = "L\'autruche du chiffrement";
-            this.label3.Click += new System.EventHandler(this.label3_Click_1);
+
             // 
             // Form1
             // 
@@ -135,7 +135,6 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Autruche";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

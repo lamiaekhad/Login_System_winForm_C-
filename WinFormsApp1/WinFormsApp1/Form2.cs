@@ -21,10 +21,6 @@ namespace WinFormsApp1
             motdepasse.PasswordChar = '*';
             confirmation.PasswordChar = '*';
         }
-
-       
-
-       
         public bool ifUserNameExist()
         {
             int exist = 0;
@@ -148,22 +144,6 @@ namespace WinFormsApp1
                 prenom.Text = "";
             }
         }
-
-        private void courriel_TextChanged(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void confirmation_TextChanged(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void nomutilisateur_TextChanged(object sender, EventArgs e)
         {
            if(valide.validationStringUtilisateur(nomutilisateur.Text))
@@ -172,9 +152,5 @@ namespace WinFormsApp1
             }
         }
 
-        private void motdepasse_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

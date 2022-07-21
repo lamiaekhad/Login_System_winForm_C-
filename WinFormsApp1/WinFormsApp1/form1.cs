@@ -17,37 +17,6 @@ namespace WinFormsApp1
             InitializeComponent();
             motdepasse1.PasswordChar = '*';
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void label3_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click_1(object sender, EventArgs e)
         {
             Form2 newform = new Form2();
@@ -55,7 +24,6 @@ namespace WinFormsApp1
             newform.ShowDialog();
             this.Show();
         }
-
         private void button3_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
@@ -77,7 +45,7 @@ namespace WinFormsApp1
                 MySqlCommand command2 = new MySqlCommand("select count(*) login from user where nomutilisateur=@nomutilisateur and motdepasse=@motdepasse and statut=@statut", conn1);
                 command2.Parameters.AddWithValue("login", login);
                 command2.Parameters.AddWithValue("nomutilisateur", user.NomUtilisateur);
-                command2.Parameters.AddWithValue("motdepasse", security.Hash(user.MotDePasse + security.Selage()));
+                command2.Parameters.AddWithValue("motdepasse", security.HashSalt(user.MotDePasse));
                 command2.Parameters.AddWithValue("statut",statut);
 
                 using (MySqlDataReader reader = command2.ExecuteReader())
@@ -90,7 +58,6 @@ namespace WinFormsApp1
                         }
                     }
                 }
-               
                 if (!login.Equals(0))
                 {
                     Main main = new Main();
@@ -99,6 +66,11 @@ namespace WinFormsApp1
                     this.Show();
                     ClearBoxText();
                     nomutilisateur1.Focus();
+                }
+                else if (ifUserExist())
+                {
+                    MessageBox.Show("Le compte n'exist pas", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ClearBoxText();
                 }
                 else if (statut2=="oui")
                 {
@@ -116,6 +88,7 @@ namespace WinFormsApp1
                 {
                     Updatestatut(nomutilisateur1.Text);
                 }
+              
             }
             catch (Exception ex)
             {
@@ -184,11 +157,47 @@ namespace WinFormsApp1
             }
             return user.Statut;
         }
-
-        private void motdepasse1_TextChanged(object sender, EventArgs e)
+        public bool ifUserExist()
         {
+            int exist = 0;
+            bool valide = false;
+            sqlconnect sql = new sqlconnect();
+            MySqlConnection conn1 = sql.connectTobase();
+            try
+            {
+                MySqlCommand command2 = new MySqlCommand("select count(*) exist from user where nomutilisateur=@nomutilisateur ", conn1);
+                command2.Parameters.AddWithValue("exist", exist);
+                command2.Parameters.AddWithValue("nomutilisateur", user.NomUtilisateur);
+                using (MySqlDataReader reader = command2.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            exist = reader.GetInt32("exist");
+                        }
+                    }
+                }
+                if (exist == 0)
+                {
+                    valide = true;
+                }
+                command2.ExecuteReader();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                conn1.Close();
+
+            }
+            return valide;
 
         }
+
     }
 
 }

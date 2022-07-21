@@ -132,7 +132,7 @@
             this.courriel.Name = "courriel";
             this.courriel.Size = new System.Drawing.Size(379, 27);
             this.courriel.TabIndex = 9;
-            this.courriel.TextChanged += new System.EventHandler(this.courriel_TextChanged);
+           
             // 
             // motdepasse
             // 
@@ -141,7 +141,7 @@
             this.motdepasse.Name = "motdepasse";
             this.motdepasse.Size = new System.Drawing.Size(379, 27);
             this.motdepasse.TabIndex = 10;
-            this.motdepasse.TextChanged += new System.EventHandler(this.motdepasse_TextChanged);
+  
             // 
             // confirmation
             // 
@@ -150,7 +150,7 @@
             this.confirmation.Name = "confirmation";
             this.confirmation.Size = new System.Drawing.Size(379, 27);
             this.confirmation.TabIndex = 11;
-            this.confirmation.TextChanged += new System.EventHandler(this.confirmation_TextChanged);
+  
             // 
             // button1
             // 
