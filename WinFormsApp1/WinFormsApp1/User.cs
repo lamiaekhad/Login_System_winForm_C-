@@ -15,6 +15,7 @@ namespace WinFormsApp1
         private string courriel;
         private string motDePasse;
         private string confirmation;
+        private string statut;
 
         public string Nom { get => nom; set => nom = value; }
         public string NomUtilisateur { get => nomUtilisateur; set => nomUtilisateur = value; }
@@ -22,6 +23,7 @@ namespace WinFormsApp1
         public string MotDePasse { get => motDePasse; set => motDePasse = value; }
         public string Confirmation { get => confirmation; set => confirmation = value; }
         public string Prenom { get => prenom; set => prenom = value; }
+        public string Statut { get => statut; set => statut = value; }
 
         public User()
         {

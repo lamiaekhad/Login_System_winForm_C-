@@ -27,6 +27,5 @@ namespace WinFormsApp1
             }
             return cnn;
         }
-
     }
 }

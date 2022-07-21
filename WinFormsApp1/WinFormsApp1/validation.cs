@@ -14,7 +14,7 @@ namespace WinFormsApp1
             if (!Regex.Match(nom, "^[a-zA-Z]*$").Success)
             {
                 valide = true;
-                MessageBox.Show("caractere non valide");
+                MessageBox.Show("La donnée n’est pas dans le bon format");
 
             }
            
@@ -28,26 +28,11 @@ namespace WinFormsApp1
             if (!Regex.Match(nomutilisateur, "^[a-zA-Z0-9]+$").Success)
             {
                 valide = true;
-                MessageBox.Show("caractere non valide");
+                MessageBox.Show("La donnée n’est pas dans le bon format");
                 
             }
             return valide;
         }
-
-        //public bool validationCourriel(string courriel)
-        //{
-        //    string message = string.Empty;
-        //    bool valide = false;
-        //    if (!Regex.Match(courriel, "^[a-zA-Z0-9-@_.]*$").Success)
-        //    {
-        //        valide = true;
-        //        MessageBox.Show("caractere non valide");
-
-        //    }
-        //    return valide;
-        //}
-
-
 
     }
 }

@@ -11,6 +11,7 @@ namespace WinFormsApp1
 {
     public partial class Form1 : Form
     {
+        User user = new User();
         public Form1()
         {
             InitializeComponent();
@@ -59,22 +60,26 @@ namespace WinFormsApp1
         {
             Environment.Exit(0);
         }
-
+        int count = 0;
         private void button2_Click(object sender, EventArgs e)
         {
-
             sqlconnect sql = new sqlconnect();
-            
             int login = 0;
             bool valide = false;
-            int count = 0;
+
+
             MySqlConnection conn1 = sql.connectTobase();
             try
             {
-                MySqlCommand command2 = new MySqlCommand("select count(*) login from user where nomutilisateur=@nomutilisateur and confirmation=@confirmation", conn1);
+                string statut2 = GetStatut(nomutilisateur1.Text);
+
+                string statut = "non";
+                MySqlCommand command2 = new MySqlCommand("select count(*) login from user where nomutilisateur=@nomutilisateur and confirmation=@confirmation and statut=@statut", conn1);
                 command2.Parameters.AddWithValue("login", login);
-                command2.Parameters.AddWithValue("nomutilisateur",nomutilisateur1.Text);
+                command2.Parameters.AddWithValue("nomutilisateur", nomutilisateur1.Text);
                 command2.Parameters.AddWithValue("confirmation", security.Hash(motdepasse1.Text));
+                command2.Parameters.AddWithValue("statut",statut);
+
                 using (MySqlDataReader reader = command2.ExecuteReader())
                 {
                     if (reader.HasRows)
@@ -85,30 +90,82 @@ namespace WinFormsApp1
                         }
                     }
                 }
-                if (login.Equals(0) || count == 1)
-                {
-                    valide = true;
-                    MessageBox.Show("Mot de passe non valide. essai encore");
-                    count = count + 1;
-                }
-                //if (login.Equals(0) || count ==2)
-                //{
-                //    valide = true;
-                //    MessageBox.Show("Mot de passe non valide. essai encore");
-                //    count = count + 1;
-                //}
-                //if (login.Equals(0) || count ==3)
-                //{
-                //    valide = true;
-                //    MessageBox.Show("Mot de passe non valide. dernier essai");
-                //    count = count + 1;
-                //}
-                else
+                if (!login.Equals(0))
                 {
                     Main main = new Main();
                     this.Hide();
                     main.ShowDialog();
                     this.Show();
+                }
+                else if (statut2=="oui")
+                {
+                    MessageBox.Show("Le compte est verrouille. cantactez l'administrateur!", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (count < 3 && statut=="non")
+                {
+                     MessageBox.Show("Mot de passe non valide. essai encore", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                     nomutilisateur1.Text = "";
+                     motdepasse1.Text = "";
+                     count = count + 1;
+                
+                }
+                else if (login.Equals(0) && count >= 3 && statut == "non")
+                {
+                    Updatestatut(nomutilisateur1.Text);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Pas de connexion a la base de donnees", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                conn1.Close();
+            }
+            
+        }
+
+        public void Updatestatut(string nomutilisateur)
+        {
+            sqlconnect sql = new sqlconnect();
+            MySqlConnection conn1 = sql.connectTobase();
+            try
+            {
+                MySqlCommand command = new MySqlCommand("update user set statut = @statut  where nomutilisateur = @nomutilisateur", conn1);
+                command.Parameters.AddWithValue("statut", "oui");
+                command.Parameters.AddWithValue("nomutilisateur", nomutilisateur);
+                command.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                conn1.Close();
+            }
+
+        }
+        public string GetStatut(string nomutilisateur)
+        {
+
+            sqlconnect sql = new sqlconnect();
+            MySqlConnection conn1 = sql.connectTobase();
+            try
+            {
+
+                MySqlCommand command = new MySqlCommand("select statut from user where nomutilisateur = @nomutilisateur", conn1);
+                command.Parameters.AddWithValue("nomutilisateur", nomutilisateur);
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            user.Statut = reader.GetString("statut");
+
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -119,7 +176,10 @@ namespace WinFormsApp1
             {
                 conn1.Close();
             }
-        
+
+            return user.Statut;
+
         }
     }
+
 }

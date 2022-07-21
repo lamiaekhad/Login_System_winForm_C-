@@ -31,10 +31,48 @@ namespace WinFormsApp1
         {
 
         }
+        public bool ifUserNameExist()
+        {
+            int exist = 0;
+            bool valide = false;
+            sqlconnect sql = new sqlconnect();
+            MySqlConnection conn1 = sql.connectTobase();
+            try
+            {
+                MySqlCommand command2 = new MySqlCommand("select count(*) exist from user where nomutilisateur=@nomutilisateur ", conn1);
+                command2.Parameters.AddWithValue("exist", exist);
+                command2.Parameters.AddWithValue("nomutilisateur", nomutilisateur.Text);
+                using (MySqlDataReader reader = command2.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            exist = reader.GetInt32("exist");
+                        }
+                    }
+                }
+                if (exist == 0)
+                {
+                    valide = true;
+                }
+                command2.ExecuteReader();
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("coco", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                conn1.Close();
+
+            }
+            return valide;
+
+        }
         private void button1_Click(object sender, EventArgs e)
         {
-            
             user.Nom = nom.Text;
             user.Prenom = prenom.Text;
             user.NomUtilisateur = nomutilisateur.Text;
@@ -50,45 +88,49 @@ namespace WinFormsApp1
             {
                 MessageBox.Show("Le mot de passe ne correspond pas");
             }
-            //if (!valide.validationString(user.Nom) && !valide.validationString(user.Prenom) && !valide.validationStringUtilisateur(user.NomUtilisateur))
-            //{
-            //    MessageBox.Show("Caractere non reconue");
-            //}
+            else if (!ifUserNameExist())
+            {
+                MessageBox.Show("Nom d'utilisateur exist deja");
+                nomutilisateur.Focus();
+                nomutilisateur.Text = "";
+            }
             else
             {
                 sqlconnect Tosql = new sqlconnect();
                 MySqlConnection conn = Tosql.connectTobase();
 
-                try
-                {
-                    string sql = "INSERT INTO user(Nom, prenom, nomutilisateur, courriel, motdepasse, confirmation, statut)" +
-                                 "VALUES (@nom, @prenom, @nomutilisatreur, @courriel, @motdepasse, @confirmation, @statut)";
+               try
+               {
+                   string sql = "INSERT INTO user(Nom, prenom, nomutilisateur, courriel, motdepasse, confirmation, statut)" +
+                                "VALUES (@nom, @prenom, @nomutilisatreur, @courriel, @motdepasse, @confirmation, @statut)";
 
-                    MySqlCommand command = new MySqlCommand(sql, conn);
-                    command.Parameters.AddWithValue("@nom", user.Nom);
-                    command.Parameters.AddWithValue("@prenom", user.Prenom);
-                    command.Parameters.AddWithValue("@nomutilisatreur", user.NomUtilisateur);
-                    command.Parameters.AddWithValue("@courriel", user.Courriel);
-                    command.Parameters.AddWithValue("@motdepasse", security.HashSalt(user.MotDePasse));
-                    command.Parameters.AddWithValue("@confirmation", security.Hash(user.Confirmation));
-                    command.Parameters.AddWithValue("@statut", "non");
-                    command.ExecuteReader();
+                   MySqlCommand command = new MySqlCommand(sql, conn);
+                   command.Parameters.AddWithValue("@nom", user.Nom);
+                   command.Parameters.AddWithValue("@prenom", user.Prenom);
+                   command.Parameters.AddWithValue("@nomutilisatreur", user.NomUtilisateur);
+                   command.Parameters.AddWithValue("@courriel", user.Courriel);
+                   command.Parameters.AddWithValue("@motdepasse", security.HashSalt(user.MotDePasse));
+                   command.Parameters.AddWithValue("@confirmation", security.Hash(user.Confirmation));
+                   command.Parameters.AddWithValue("@statut", "non");
+                   command.ExecuteReader();
 
-                    MessageBox.Show("Vous avez creer un nouveau compte");
-                    Form1 newform = new Form1();
-                    this.Hide();
-                    newform.ShowDialog();
-                    this.Show();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                finally
-                {
-                    conn.Close();
-                   
-                }
+                   MessageBox.Show("Vous avez creer un nouveau compte");
+                    
+                   Form1 newform = new Form1();
+                   this.Hide();
+                   newform.ShowDialog();
+                   this.Show();
+               }
+               catch (Exception ex)
+               {
+                   MessageBox.Show("pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+               }
+               finally
+               {
+                   conn.Close();
+
+               }
+                
             }
           
 
