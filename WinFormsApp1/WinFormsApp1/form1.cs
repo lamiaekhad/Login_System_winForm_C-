@@ -12,6 +12,7 @@ namespace WinFormsApp1
     public partial class Form1 : Form
     {
         User user = new User();
+        int count = 0;
         public Form1()
         {
             InitializeComponent();
@@ -28,7 +29,6 @@ namespace WinFormsApp1
         {
             Environment.Exit(0);
         }
-        int count = 0;
         private void button2_Click(object sender, EventArgs e)
         {
             int login = 0;
@@ -70,17 +70,17 @@ namespace WinFormsApp1
                 }
                 else if (ifUserExist())
                 {
-                    MessageNotExist();
+                    Messages.MessageNotExist();
                     ClearBoxText();
                 }
                 else if (statut2.Equals(Islock))
                 {
-                    MessageCompteVerrouiller();
+                    Messages.MessageCompteVerrouiller();
                     ClearBoxText();
                 }
                 else if (count < 3 && statut.Equals(IsOpen))
                 {
-                     PasswordNotCorrect();
+                    Messages.PasswordNotCorrect();
                      ClearBoxText();
                      count = count + 1;
                 }
@@ -92,7 +92,7 @@ namespace WinFormsApp1
             }
             catch (Exception ex)
             {
-                MessageNotConnectToBD();
+                Messages.MessageNotConnectToBD();
             }
             finally
             {
@@ -118,7 +118,7 @@ namespace WinFormsApp1
             }
             catch (Exception ex)
             {
-                MessageNotConnectToBD();
+                Messages.MessageNotConnectToBD();
             }
             finally
             {
@@ -148,7 +148,7 @@ namespace WinFormsApp1
             }
             catch (Exception ex)
             {
-                MessageNotConnectToBD();
+                Messages.MessageNotConnectToBD();
             }
             finally
             {
@@ -187,7 +187,7 @@ namespace WinFormsApp1
             }
             catch (Exception ex)
             {
-                MessageNotConnectToBD();
+               Messages.MessageNotConnectToBD();
             }
             finally
             {
@@ -197,22 +197,7 @@ namespace WinFormsApp1
             return valide;
 
         }
-        public void MessageNotExist()
-        {
-            MessageBox.Show("Le compte n'exist pas", "Message", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-        }
-        public void PasswordNotCorrect()
-        {
-            MessageBox.Show("Le mot de passe est incorrect. essayez à nouveau", "Message", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-        }
-        public void MessageNotConnectToBD()
-        {
-            MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-        public void MessageCompteVerrouiller()
-        {
-            MessageBox.Show("Le compte est verrouillé. Contactez l'administrateur!", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
+     
     }
 
 }

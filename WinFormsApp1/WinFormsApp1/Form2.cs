@@ -50,7 +50,7 @@ namespace WinFormsApp1
             }
             catch (Exception ex)
             {
-                MessageNotConnectToBD();
+                Messages.MessageNotConnectToBD();
             }
             finally
             {
@@ -71,19 +71,25 @@ namespace WinFormsApp1
 
             if (user.NomUtilisateur.Equals("") || user.MotDePasse.Equals("") || user.Nom.Equals("") || user.Prenom.Equals("") || user.Courriel.Equals("") || user.Confirmation.Equals(""))
             {
-                MessageChampsObligatoire();
+                Messages.MessageChampsObligatoire();
             }
             else if (!motdepasse.Text.Equals(confirmation.Text))
             {
-                MessageWrongPassword();
+                Messages.MessageWrongPassword();
                 confirmation.Text = "";
                 confirmation.Focus();
             }
             else if (!ifUserNameExist())
             {
-                MessageCompteExistant();
+                Messages.MessageCompteExistant();
                 nomutilisateur.Text = "";
                 nomutilisateur.Focus();
+            }
+            else if (valide.validationCourriel(courriel.Text))
+            {
+                Messages.MessageCourrielNonValide();
+                courriel.Text = "";
+                courriel.Focus();
             }
             else
             {
@@ -105,8 +111,8 @@ namespace WinFormsApp1
                    command.Parameters.AddWithValue("@statut", "non");
                    command.ExecuteReader();
 
-                   MessageBox.Show("Vous avez creer un nouveau compte");
-                    
+                    Messages.MessageCompteCreer();
+
                    Form1 newform = new Form1();
                    this.Hide();
                    newform.ShowDialog();
@@ -114,7 +120,7 @@ namespace WinFormsApp1
                }
                catch (Exception ex)
                {
-                   MessageNotConnectToBD();
+                    Messages.MessageNotConnectToBD();
                }
                 finally
                {
@@ -163,22 +169,6 @@ namespace WinFormsApp1
                 label8.Visible = false;
                 label9.Visible = false;
             }
-        }
-        public void MessageNotConnectToBD()
-        {
-            MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-        public void MessageCompteExistant()
-        {
-            MessageBox.Show("Nom d'utilisateur exist deja", "Message", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-        }
-        public void MessageChampsObligatoire()
-        {
-            MessageBox.Show("Merci de remplir les champs obligatoires", "Message", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-        }
-        public void MessageWrongPassword()
-        {
-            MessageBox.Show("Le mot de passe ne correspond pas.", "Message", MessageBoxButtons.OK);
         }
     }
 }
