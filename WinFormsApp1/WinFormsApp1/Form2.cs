@@ -179,7 +179,7 @@ namespace WinFormsApp1
         }
         public void MessageWrongPassword()
         {
-            MessageBox.Show("Le mot de passe ne correspond pas.");
+            MessageBox.Show("Le mot de passe ne correspond pas.", "Message", MessageBoxButtons.OK);
         }
 
         

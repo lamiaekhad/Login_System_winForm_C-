@@ -46,7 +46,6 @@
             this.label1.Size = new System.Drawing.Size(98, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Mot de passe";
-           
             // 
             // label2
             // 
@@ -56,7 +55,6 @@
             this.label2.Size = new System.Drawing.Size(123, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "Nom d\'utilisateur";
-           
             // 
             // nomutilisateur1
             // 
@@ -65,7 +63,7 @@
             this.nomutilisateur1.Name = "nomutilisateur1";
             this.nomutilisateur1.Size = new System.Drawing.Size(348, 27);
             this.nomutilisateur1.TabIndex = 3;
-         
+            this.nomutilisateur1.TextChanged += new System.EventHandler(this.nomutilisateur1_TextChanged);
             // 
             // motdepasse1
             // 
@@ -73,7 +71,6 @@
             this.motdepasse1.Name = "motdepasse1";
             this.motdepasse1.Size = new System.Drawing.Size(348, 27);
             this.motdepasse1.TabIndex = 4;
-           
             // 
             // button1
             // 
@@ -117,7 +114,6 @@
             this.label3.Size = new System.Drawing.Size(408, 45);
             this.label3.TabIndex = 8;
             this.label3.Text = "L\'autruche du chiffrement";
-
             // 
             // Form1
             // 

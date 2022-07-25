@@ -198,11 +198,11 @@ namespace WinFormsApp1
         }
         public void MessageNotExist()
         {
-            MessageBox.Show("Le compte n'exist pas", "Message", MessageBoxButtons.RetryCancel, MessageBoxIcon.Stop);
+            MessageBox.Show("Le compte n'exist pas", "Message", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         }
         public void PasswordNotCorrect()
         {
-            MessageBox.Show("Le mot de passe est incorrect. essayez à nouveau", "Message", MessageBoxButtons.RetryCancel, MessageBoxIcon.Stop);
+            MessageBox.Show("Le mot de passe est incorrect. essayez à nouveau", "Message", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         }
         public void MessageNotConnectToBD()
         {
@@ -213,6 +213,10 @@ namespace WinFormsApp1
             MessageBox.Show("Le compte est verrouillé. Contactez l'administrateur!", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
+        private void nomutilisateur1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
