@@ -14,7 +14,7 @@ namespace WinFormsApp1
             if (!Regex.Match(nom, "^[a-zA-Z]*$").Success)
             {
                 valide = true;
-                MessageBonFormat();
+                MessageBox.Show("La donnée n’est pas dans le bon format");
             }
             return valide;
         }
@@ -34,7 +34,7 @@ namespace WinFormsApp1
             Form2 form2 = new Form2();
             string message = string.Empty;
             bool valide = false;
-            if (!Regex.Match(courriel, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$").Success)
+            if (!Regex.Match(courriel, @"^([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)$").Success)
             {
                 valide = true;
                 
