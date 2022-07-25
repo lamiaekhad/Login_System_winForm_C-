@@ -37,7 +37,8 @@ namespace WinFormsApp1
 
             user.NomUtilisateur = nomutilisateur1.Text;
             user.MotDePasse = motdepasse1.Text;
-
+            string Islock = "oui";
+            string IsOpen = "non";
             try
             {
                 string statut2 = GetStatut(nomutilisateur1.Text);
@@ -72,12 +73,12 @@ namespace WinFormsApp1
                     MessageNotExist();
                     ClearBoxText();
                 }
-                else if (statut2.Equals("oui"))
+                else if (statut2.Equals(Islock))
                 {
                     MessageCompteVerrouiller();
                     ClearBoxText();
                 }
-                else if (count < 3 && statut.Equals("non"))
+                else if (count < 3 && statut.Equals(IsOpen))
                 {
                      PasswordNotCorrect();
                      ClearBoxText();
