@@ -121,16 +121,15 @@ namespace WinFormsApp1
                    conn.Close();
 
                }
-                
             }
         }
+       
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if (valide.validationString(nom.Text))
             {
                 nom.Text = "";
             }
-           
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -181,7 +180,5 @@ namespace WinFormsApp1
         {
             MessageBox.Show("Le mot de passe ne correspond pas.", "Message", MessageBoxButtons.OK);
         }
-
-        
     }
 }

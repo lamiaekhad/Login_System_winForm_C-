@@ -63,7 +63,6 @@
             this.nomutilisateur1.Name = "nomutilisateur1";
             this.nomutilisateur1.Size = new System.Drawing.Size(348, 27);
             this.nomutilisateur1.TabIndex = 3;
-            this.nomutilisateur1.TextChanged += new System.EventHandler(this.nomutilisateur1_TextChanged);
             // 
             // motdepasse1
             // 

@@ -83,7 +83,7 @@ namespace WinFormsApp1
                      ClearBoxText();
                      count = count + 1;
                 }
-                else if (login.Equals(0) && count >= 3 && statut.Equals("non"))
+                else if (login.Equals(0) && count >= 3 && statut.Equals(IsOpen))
                 {
                     Updatestatut(nomutilisateur1.Text);
                 }

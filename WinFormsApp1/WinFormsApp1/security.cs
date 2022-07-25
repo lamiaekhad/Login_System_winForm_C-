@@ -8,8 +8,6 @@ namespace WinFormsApp1
 {
     internal class security
     {
-       
-        
         public static string HashSalt(string motdepasse)
         {
             string salt = "6Q!98A#K8/L$";
