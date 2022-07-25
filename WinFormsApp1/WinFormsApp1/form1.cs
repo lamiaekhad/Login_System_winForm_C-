@@ -212,11 +212,6 @@ namespace WinFormsApp1
         {
             MessageBox.Show("Le compte est verrouillé. Contactez l'administrateur!", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
-
-        private void nomutilisateur1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 
 }
