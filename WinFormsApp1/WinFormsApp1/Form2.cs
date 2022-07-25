@@ -42,16 +42,15 @@ namespace WinFormsApp1
                         }
                     }
                 }
-                if (exist == 0)
+                if (exist.Equals(0))
                 {
                     valide = true;
                 }
                 command2.ExecuteReader();
-
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageNotConnectToBD();
             }
             finally
             {
@@ -70,19 +69,21 @@ namespace WinFormsApp1
             user.MotDePasse = motdepasse.Text;
             user.Confirmation = confirmation.Text;
 
-            if (user.NomUtilisateur == "" || user.MotDePasse == "" || user.Nom == "" || user.Prenom == "" || user.Courriel == "" || user.Confirmation == "")
+            if (user.NomUtilisateur.Equals("") || user.MotDePasse.Equals("") || user.Nom.Equals("") || user.Prenom.Equals("") || user.Courriel.Equals("") || user.Confirmation.Equals(""))
             {
-                MessageBox.Show("Merci de remplir les champs obligatoires");
+                MessageChampsObligatoire();
             }
-            else if (motdepasse.Text != confirmation.Text)
+            else if (!motdepasse.Text.Equals(confirmation.Text))
             {
-                MessageBox.Show("Le mot de passe ne correspond pas");
+                MessageWrongPassword();
+                confirmation.Text = "";
+                confirmation.Focus();
             }
             else if (!ifUserNameExist())
             {
-                MessageBox.Show("Nom d'utilisateur exist deja");
-                nomutilisateur.Focus();
+                MessageCompteExistant();
                 nomutilisateur.Text = "";
+                nomutilisateur.Focus();
             }
             else
             {
@@ -113,9 +114,9 @@ namespace WinFormsApp1
                }
                catch (Exception ex)
                {
-                   MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                   MessageNotConnectToBD();
                }
-               finally
+                finally
                {
                    conn.Close();
 
@@ -123,20 +124,18 @@ namespace WinFormsApp1
                 
             }
         }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if (valide.validationString(nom.Text))
             {
                 nom.Text = "";
             }
+           
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
         }
-
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             if (valide.validationString(prenom.Text))
@@ -151,6 +150,38 @@ namespace WinFormsApp1
                 nomutilisateur.Text = "";
             }
         }
+        private void courriel_TextChanged(object sender, EventArgs e)
+        {
+            if (valide.validationCourriel(courriel.Text))
+            {
+                label7.Visible = true;
+                label8.Visible = true;
+                label9.Visible = true;
+            }
+            else
+            {
+                label7.Visible = false;
+                label8.Visible = false;
+                label9.Visible = false;
+            }
+        }
+        public void MessageNotConnectToBD()
+        {
+            MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+        public void MessageCompteExistant()
+        {
+            MessageBox.Show("Nom d'utilisateur exist deja", "Message", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        }
+        public void MessageChampsObligatoire()
+        {
+            MessageBox.Show("Merci de remplir les champs obligatoires", "Message", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        }
+        public void MessageWrongPassword()
+        {
+            MessageBox.Show("Le mot de passe ne correspond pas.");
+        }
 
+        
     }
 }

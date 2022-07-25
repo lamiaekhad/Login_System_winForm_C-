@@ -69,22 +69,21 @@ namespace WinFormsApp1
                 }
                 else if (ifUserExist())
                 {
-                    MessageBox.Show("Le compte n'exist pas", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageNotExist();
                     ClearBoxText();
                 }
-                else if (statut2=="oui")
+                else if (statut2.Equals("oui"))
                 {
-                    MessageBox.Show("Le compte est verrouille. Contactez l'administrateur!", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageCompteVerrouiller();
                     ClearBoxText();
                 }
-                else if (count < 3 && statut=="non")
+                else if (count < 3 && statut.Equals("non"))
                 {
-                     MessageBox.Show("Le mot de passe est incorrect. essayez à nouveau", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                     PasswordNotCorrect();
                      ClearBoxText();
                      count = count + 1;
-                
                 }
-                else if (login.Equals(0) && count >= 3 && statut == "non")
+                else if (login.Equals(0) && count >= 3 && statut.Equals("non"))
                 {
                     Updatestatut(nomutilisateur1.Text);
                 }
@@ -92,14 +91,14 @@ namespace WinFormsApp1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageNotConnectToBD();
             }
             finally
             {
                 conn1.Close();
             }
         }
-
+       
         public void ClearBoxText()
         {
             nomutilisateur1.Text = "";
@@ -118,7 +117,7 @@ namespace WinFormsApp1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageNotConnectToBD();
             }
             finally
             {
@@ -148,7 +147,7 @@ namespace WinFormsApp1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageNotConnectToBD();
             }
             finally
             {
@@ -178,7 +177,7 @@ namespace WinFormsApp1
                         }
                     }
                 }
-                if (exist == 0)
+                if (exist.Equals(0))
                 {
                     valide = true;
                 }
@@ -187,7 +186,7 @@ namespace WinFormsApp1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageNotConnectToBD();
             }
             finally
             {
@@ -196,6 +195,22 @@ namespace WinFormsApp1
             }
             return valide;
 
+        }
+        public void MessageNotExist()
+        {
+            MessageBox.Show("Le compte n'exist pas", "Message", MessageBoxButtons.RetryCancel, MessageBoxIcon.Stop);
+        }
+        public void PasswordNotCorrect()
+        {
+            MessageBox.Show("Le mot de passe est incorrect. essayez à nouveau", "Message", MessageBoxButtons.RetryCancel, MessageBoxIcon.Stop);
+        }
+        public void MessageNotConnectToBD()
+        {
+            MessageBox.Show("Pas de connexion", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+        public void MessageCompteVerrouiller()
+        {
+            MessageBox.Show("Le compte est verrouillé. Contactez l'administrateur!", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
     }
