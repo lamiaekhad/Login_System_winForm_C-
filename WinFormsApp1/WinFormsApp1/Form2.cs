@@ -98,8 +98,8 @@ namespace WinFormsApp1
 
                try
                {
-                   string sql = "INSERT INTO user(Nom, prenom, nomutilisateur, courriel, motdepasse, confirmation, statut)" +
-                                "VALUES (@nom, @prenom, @nomutilisatreur, @courriel, @motdepasse, @confirmation, @statut)";
+                   string sql = "INSERT INTO user(Nom, prenom, nomutilisateur, courriel, motdepasse, statut)" +
+                                "VALUES (@nom, @prenom, @nomutilisatreur, @courriel, @motdepasse, @statut)";
 
                    MySqlCommand command = new MySqlCommand(sql, conn);
                    command.Parameters.AddWithValue("@nom", user.Nom);
@@ -107,7 +107,6 @@ namespace WinFormsApp1
                    command.Parameters.AddWithValue("@nomutilisatreur", user.NomUtilisateur);
                    command.Parameters.AddWithValue("@courriel", user.Courriel);
                    command.Parameters.AddWithValue("@motdepasse", security.HashSalt(user.MotDePasse));
-                   command.Parameters.AddWithValue("@confirmation", security.Hash(user.Confirmation));
                    command.Parameters.AddWithValue("@statut", "non");
                    command.ExecuteReader();
 

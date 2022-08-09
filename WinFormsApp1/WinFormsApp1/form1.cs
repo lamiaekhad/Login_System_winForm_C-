@@ -192,7 +192,6 @@ namespace WinFormsApp1
             finally
             {
                 conn1.Close();
-
             }
             return valide;
 

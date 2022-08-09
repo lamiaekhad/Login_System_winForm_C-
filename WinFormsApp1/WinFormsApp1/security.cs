@@ -15,12 +15,7 @@ namespace WinFormsApp1
             var hashBytes = SHA256.Create().ComputeHash(bytes);
             return Convert.ToBase64String(hashBytes);
         }
-        public static string Hash(string motdepasse)
-        {
-            var bytes = new UTF8Encoding().GetBytes(motdepasse);
-            var hashBytes = SHA256.Create().ComputeHash(bytes);
-            return Convert.ToBase64String(hashBytes);
-        }
+       
 
     }
 }
