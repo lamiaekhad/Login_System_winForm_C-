@@ -65,6 +65,7 @@ namespace WinFormsApp1
                     this.Hide();
                     main.ShowDialog();
                     this.Show();
+                    initializecount(user.NomUtilisateur);
                     ClearBoxText();
                     nomutilisateur1.Focus();
                 }
@@ -78,15 +79,16 @@ namespace WinFormsApp1
                     Messages.MessageCompteVerrouiller();
                     ClearBoxText();
                 }
-                else if (count < 3 && statut.Equals(IsOpen))
+                else if (Getcount(user.NomUtilisateur)/*count*/ < 3 && statut.Equals(IsOpen))
                 {
                     Messages.PasswordNotCorrect();
-                     ClearBoxText();
-                     count = count + 1;
+                    ClearBoxText();
+                    // count = count + 1;
+                    Updatecount(user.NomUtilisateur, Getcount(user.NomUtilisateur));
                 }
-                else if (login.Equals(0) && count >= 3 && statut.Equals(IsOpen))
+                else if (login.Equals(0) && Getcount(user.NomUtilisateur)/*count*/  >= 3 && statut.Equals(IsOpen))
                 {
-                    Updatestatut(nomutilisateur1.Text);
+                    Updatestatut(user.NomUtilisateur);
                 }
               
             }
@@ -196,7 +198,79 @@ namespace WinFormsApp1
             return valide;
 
         }
-     
+        public int Getcount(string nomutilisateur)
+        {
+            int count=0;
+            sqlconnect sql = new sqlconnect();
+            MySqlConnection conn1 = sql.connectTobase();
+            try
+            {
+                MySqlCommand command = new MySqlCommand("select thecount from user where nomutilisateur = @nomutilisateur", conn1);
+                command.Parameters.AddWithValue("nomutilisateur", nomutilisateur);
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            count = reader.GetInt32("thecount");
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Messages.MessageNotConnectToBD();
+            }
+            finally
+            {
+                conn1.Close();
+
+            }
+            return count;
+        }
+        public void Updatecount(string nomutilisateur, int thecount)
+        {
+            sqlconnect sql = new sqlconnect();
+            MySqlConnection conn1 = sql.connectTobase();
+            try
+            {
+                MySqlCommand command = new MySqlCommand("update user set thecount = @thecount  where nomutilisateur = @nomutilisateur", conn1);
+                command.Parameters.AddWithValue("thecount", ++thecount);
+                command.Parameters.AddWithValue("nomutilisateur", nomutilisateur);
+                command.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                Messages.MessageNotConnectToBD();
+            }
+            finally
+            {
+                conn1.Close();
+            }
+        }
+        public void initializecount(string nomutilisateur)
+        {
+            sqlconnect sql = new sqlconnect();
+            MySqlConnection conn1 = sql.connectTobase();
+            try
+            {
+                MySqlCommand command = new MySqlCommand("update user set thecount = @thecount  where nomutilisateur = @nomutilisateur", conn1);
+                command.Parameters.AddWithValue("thecount", 0);
+                command.Parameters.AddWithValue("nomutilisateur", nomutilisateur);
+                command.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                Messages.MessageNotConnectToBD();
+            }
+            finally
+            {
+                conn1.Close();
+            }
+        }
+
     }
 
 }
