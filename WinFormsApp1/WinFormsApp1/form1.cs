@@ -99,7 +99,6 @@ namespace WinFormsApp1
                 {
                     Updatestatut(user.NomUtilisateur);
                 }
-              
             }
             catch (Exception ex)
             {
