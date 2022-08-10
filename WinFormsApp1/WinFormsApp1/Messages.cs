@@ -47,5 +47,14 @@ namespace WinFormsApp1
         {
             MessageBox.Show("La donnée n’est pas dans le bon format", "message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
+        public static void MessageMotDePasseVide()
+        {
+            MessageBox.Show("Insérez votre Mot de passe", "message", MessageBoxButtons.OK);
+        }
+        public static void MessageNomUtilisateurVide()
+        {
+            MessageBox.Show("Insérez votre Nom d'utilisateur", "message", MessageBoxButtons.OK);
+        }
+        
     }
 }

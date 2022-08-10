@@ -12,7 +12,7 @@ namespace WinFormsApp1
     public partial class Form1 : Form
     {
         User user = new User();
-        int count = 0;
+       
         public Form1()
         {
             InitializeComponent();
@@ -69,6 +69,16 @@ namespace WinFormsApp1
                     ClearBoxText();
                     nomutilisateur1.Focus();
                 }
+                else if (user.NomUtilisateur.Equals(""))
+                {
+                    Messages.MessageNomUtilisateurVide();
+                    nomutilisateur1.Focus();
+                }
+                else if (user.MotDePasse.Equals(""))
+                {
+                    Messages.MessageMotDePasseVide();
+                    motdepasse1.Focus();
+                }
                 else if (ifUserExist())
                 {
                     Messages.MessageNotExist();
@@ -79,14 +89,13 @@ namespace WinFormsApp1
                     Messages.MessageCompteVerrouiller();
                     ClearBoxText();
                 }
-                else if (Getcount(user.NomUtilisateur)/*count*/ < 3 && statut.Equals(IsOpen))
+                else if (Getcount(user.NomUtilisateur)< 3 && statut.Equals(IsOpen))
                 {
                     Messages.PasswordNotCorrect();
                     ClearBoxText();
-                    // count = count + 1;
                     Updatecount(user.NomUtilisateur, Getcount(user.NomUtilisateur));
                 }
-                else if (login.Equals(0) && Getcount(user.NomUtilisateur)/*count*/  >= 3 && statut.Equals(IsOpen))
+                else if (login.Equals(0) && Getcount(user.NomUtilisateur) >= 3 && statut.Equals(IsOpen))
                 {
                     Updatestatut(user.NomUtilisateur);
                 }
