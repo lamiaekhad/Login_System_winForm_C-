@@ -31,7 +31,7 @@ namespace WinFormsApp1
         }
         public bool validationCourriel(string courriel)
         {
-            Form2 form2 = new Form2();
+            FormulaireInscription form2 = new FormulaireInscription();
             string message = string.Empty;
             bool valide = false;
             if (!Regex.Match(courriel, @"^([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)$").Success)

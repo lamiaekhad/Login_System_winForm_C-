@@ -5,7 +5,6 @@ C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\bin\Debug\netcoreapp3.1\WinFor
 C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\bin\Debug\netcoreapp3.1\WinFormsApp1.dll
 C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\bin\Debug\netcoreapp3.1\WinFormsApp1.pdb
 C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.csproj.AssemblyReference.cache
-C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.Form1.resources
 C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.csproj.GenerateResource.cache
 C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.GeneratedMSBuildEditorConfig.editorconfig
 C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.AssemblyInfoInputs.cache
@@ -14,7 +13,6 @@ C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFor
 C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.dll
 C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.pdb
 C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.genruntimeconfig.cache
-C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.Form2.resources
 C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
 C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\bin\Debug\netcoreapp3.1\Google.Protobuf.dll
 C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\bin\Debug\netcoreapp3.1\K4os.Compression.LZ4.dll
@@ -30,3 +28,5 @@ C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\bin\Debug\netcoreapp3.1\xunit.
 C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\bin\Debug\netcoreapp3.1\xunit.execution.dotnet.dll
 C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.Main.resources
 C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\bin\Debug\netcoreapp3.1\Microsoft.Owin.Security.dll
+C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.formulaireConnexion.resources
+C:\depo\Projet_Security\WinFormsApp1\WinFormsApp1\obj\Debug\netcoreapp3.1\WinFormsApp1.FormulaireInscription.resources

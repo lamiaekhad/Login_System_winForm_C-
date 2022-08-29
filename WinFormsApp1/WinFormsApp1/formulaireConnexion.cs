@@ -9,20 +9,20 @@ using System.Windows.Forms;
 
 namespace WinFormsApp1
 {
-    public partial class Form1 : Form
+    public partial class formulaireConnexion : Form
     {
         User user = new User();
        
-        public Form1()
+        public formulaireConnexion()
         {
             InitializeComponent();
             motdepasse1.PasswordChar = '*';
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
-            Form2 newform = new Form2();
+            FormulaireInscription formulaireInscription = new FormulaireInscription();
             this.Hide();
-            newform.ShowDialog();
+            formulaireInscription.ShowDialog();
             this.Show();
         }
         private void button3_Click(object sender, EventArgs e)
@@ -88,6 +88,7 @@ namespace WinFormsApp1
                 {
                     Messages.MessageCompteVerrouiller();
                     ClearBoxText();
+
                 }
                 else if (Getcount(user.NomUtilisateur)< 3 && statut.Equals(IsOpen))
                 {
@@ -112,8 +113,8 @@ namespace WinFormsApp1
        
         public void ClearBoxText()
         {
-            nomutilisateur1.Text = "";
-            motdepasse1.Text = "";
+            nomutilisateur1.Clear();
+            motdepasse1.Clear();
         }
         public void Updatestatut(string nomutilisateur)
         {

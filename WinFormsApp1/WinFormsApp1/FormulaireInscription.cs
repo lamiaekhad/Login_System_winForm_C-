@@ -10,12 +10,12 @@ using System.Security.Cryptography;
 
 namespace WinFormsApp1
 {
-    public partial class Form2 : Form
+    public partial class FormulaireInscription : Form
     {
         User user = new User();
         validation valide = new validation();
 
-        public Form2()
+        public FormulaireInscription()
         {
             InitializeComponent();
             motdepasse.PasswordChar = '*';
@@ -108,14 +108,14 @@ namespace WinFormsApp1
                    command.Parameters.AddWithValue("@courriel", user.Courriel);
                    command.Parameters.AddWithValue("@motdepasse", security.HashSalt(user.MotDePasse));
                    command.Parameters.AddWithValue("@statut", "non");
-                    command.Parameters.AddWithValue("@count", 0);
-                    command.ExecuteReader();
+                   command.Parameters.AddWithValue("@count", 0);
+                   command.ExecuteReader();
 
-                    Messages.MessageCompteCreer();
+                   Messages.MessageCompteCreer();
 
-                   Form1 newform = new Form1();
+                   formulaireConnexion formulaireConn = new formulaireConnexion();
                    this.Hide();
-                   newform.ShowDialog();
+                    formulaireConn.ShowDialog();
                    this.Show();
                }
                catch (Exception ex)
@@ -125,7 +125,6 @@ namespace WinFormsApp1
                 finally
                {
                    conn.Close();
-
                }
             }
         }
@@ -150,9 +149,9 @@ namespace WinFormsApp1
         }
         private void nomutilisateur_TextChanged(object sender, EventArgs e)
         {
-           if(valide.validationStringUtilisateur(nomutilisateur.Text))
+            if(valide.validationStringUtilisateur(nomutilisateur.Text))
             {
-                nomutilisateur.Text = "";
+                 nomutilisateur.Text = "";
             }
         }
         private void courriel_TextChanged(object sender, EventArgs e)
@@ -169,6 +168,16 @@ namespace WinFormsApp1
                 label8.Visible = false;
                 label9.Visible = false;
             }
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

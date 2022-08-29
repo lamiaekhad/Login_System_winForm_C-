@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -59,13 +60,27 @@
             this.label3.BackColor = System.Drawing.SystemColors.Desktop;
             this.label3.Font = new System.Drawing.Font("Showcard Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.label3.Location = new System.Drawing.Point(61, 232);
+            this.label3.Location = new System.Drawing.Point(104, 239);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(635, 42);
+            this.label3.Size = new System.Drawing.Size(549, 63);
             this.label3.TabIndex = 2;
-            this.label3.Text = "“Quand j’ai écrit ce code, seuls dieu et moi comprenions ce que j’ai fait.\r\n Main" +
-    "tenant, seul dieu le sait.”";
+            this.label3.Text = "“Whether you want to uncover the secrets of the universe,\r\n or you just want to p" +
+    "ursue a career in the 21st century, \r\nbasic computer programming is an essential" +
+    " skill to learn.”";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.Desktop;
+            this.label4.Font = new System.Drawing.Font("Showcard Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.label4.Location = new System.Drawing.Point(445, 322);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(187, 21);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "- Stephen Hawking- ";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Main
             // 
@@ -73,6 +88,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlText;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -89,5 +105,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }

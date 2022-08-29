@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApp1
 {
-    partial class Form2
+    partial class FormulaireInscription
     {
         /// <summary>
         /// Required designer variable.
@@ -179,10 +179,11 @@
             this.label7.ForeColor = System.Drawing.Color.Red;
             this.label7.Location = new System.Drawing.Point(27, 377);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(241, 20);
+            this.label7.Size = new System.Drawing.Size(233, 20);
             this.label7.TabIndex = 14;
-            this.label7.Text = "Le champ dois contenir un courriel ";
+            this.label7.Text = "le champ doit contenir un courriel";
             this.label7.Visible = false;
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label8
             // 
@@ -206,7 +207,7 @@
             this.label9.Text = "*";
             this.label9.Visible = false;
             // 
-            // Form2
+            // FormulaireInscription
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -228,9 +229,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form2";
+            this.Name = "FormulaireInscription";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Autruche";
+            this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
